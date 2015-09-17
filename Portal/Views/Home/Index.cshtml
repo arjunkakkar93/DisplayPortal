@@ -46,33 +46,31 @@
 
 
 <body class="grey">
-
-    <script type='text/javascript'>
-//<![CDATA[
-	$(window).load(function(){
-		function getRandomOptions(){
+    @*<script type="text/javascript">
+    //<![CDATA[
+    $(window).load(function () {
+    function getRandomOptions() {
     // this could obviously be a lot more random
     var doIt = Math.floor(Math.random() * 1001) % 2 == 0;
     // set random options supported by the goto method
     // http://www.drewgreenwell.com/projects/metrojs#liveTileMethods
     return {
-            index: "next",
-            delay: 3000,
-            animationDirection: doIt ? 'forward' : 'backward',
-            direction: doIt ? 'vertical' : 'horizontal'
-        };
-	}
-	// setup the tile and then call goto on it the first time
-	$("#tile3").liveTile({
-		animationComplete: function(tileData){
-			$(this).liveTile("goto", getRandomOptions());
-		}
-	}).liveTile("goto", getRandomOptions());
+    index: "next",
+    delay: 3000,
+    animationDirection: doIt ? 'forward' : 'backward',
+    direction: doIt ? 'vertical' : 'horizontal'
+    };
+    }
+    // setup the tile and then call goto on it the first time
+    $("#tile3").liveTile({
+    animationComplete: function (tileData) {
+    $(this).liveTile("goto", getRandomOptions());
+    }
+    }).liveTile("goto", getRandomOptions());
 
 
-	});
-    </script>
-
+    });
+    </script>*@
     <table style="margin-top:20px" border="0px">
         <tr>
             <td width="50%">
@@ -82,7 +80,7 @@
                             <div class="">
                                 <div id="nt-example1-container">
                                     <ul id="nt-example1">
-                                    @*list goes here*@
+                                        @*list goes here*@
                                     </ul>
 
                                 </div>
@@ -107,28 +105,56 @@
                             </div>
                         </td>
                     </tr>
+        
                     <tr>
                         <td>
                             <table>
                                 <tr>
                                     <td>
                                         <div class="red">
-                                            <div id="tile3" data-mode="carousel" data-start-now="false" class="live-tile one-wide one-tall" data-repeat='0'>
+                                            <div id="tile31" data-mode="carousel" data-start-now="false" class="live-tile one-wide one-tall" data-repeat='0'>
                                                 <div><img id="smallTile1" class="full" src="http://www.drewgreenwell.com/images/sample/1tw.gif" alt="1" /></div>
                                             </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div id="firstTextUpdate">
+                                            <p>
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                                when an unknown printer took a galley of type and scrambled it to make a type
+                                                specimen book. It has survived not only five centuries, but also the leap into
+                                                electronic typesetting, remaining essentially unchanged. It was popularised in
+                                                the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.
+                                            </p>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <div class="blue">
-                                            <div id="tile3" data-mode="carousel" data-start-now="false" class="live-tile one-wide one-tall" data-repeat='0'>
+                                            <div id="tile32" data-mode="carousel" data-start-now="false" class="live-tile one-wide one-tall" data-repeat='0'>
                                                 <div><img id="smallTile2" class="full" src="http://www.drewgreenwell.com/images/sample/1tw.gif" alt="1" /></div>
                                             </div>
+                                        </div>
                                     </td>
+                                    <td>
+                                        <div id="secondTextUpdate">
+                                            <p>
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                                when an unknown printer took a galley of type and scrambled it to make a type
+                                                specimen book. It has survived not only five centuries, but also the leap into
+                                                electronic typesetting, remaining essentially unchanged. It was popularised in
+                                                the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.
+                                            </p>
+                                        </div>
+                                    </td>
+
                                 </tr>
+
                             </table>
-                            </div>
+
                         </td>
                     </tr>
                 </table>
@@ -147,21 +173,21 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script>
 
-            var nt_title = $('#nt-title').newsTicker({
-                row_height: 40,
-                max_rows: 1,
-                duration: 3000,
-                pauseOnHover: 0
-            });
-            var nt_example1 = $('#nt-example1').newsTicker({
-                row_height: 80,
-                max_rows: 11,
-                duration: 4000,
-                prevButton: $('#nt-example1-prev'),
-                nextButton: $('#nt-example1-next')
-            });
+        var nt_title = $('#nt-title').newsTicker({
+            row_height: 40,
+            max_rows: 1,
+            duration: 3000,
+            pauseOnHover: 0
+        });
+        var nt_example1 = $('#nt-example1').newsTicker({
+            row_height: 80,
+            max_rows: 11,
+            duration: 4000,
+            prevButton: $('#nt-example1-prev'),
+            nextButton: $('#nt-example1-next')
+        });
     </script>
+   
     <script src="~/Scripts/DynamicData.js"></script>
 </body>
 </html>
-

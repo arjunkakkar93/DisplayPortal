@@ -11,7 +11,8 @@ namespace Portal.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            //return View();
+            return File(Server.MapPath("/Views/Home/") + "Index1.html", "text/html"); 
         }
     }
 }
