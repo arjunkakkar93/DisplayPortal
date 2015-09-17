@@ -26,11 +26,11 @@ namespace LTUpdatePortalApi.Controllers
         
         [ScriptMethod(ResponseFormat=ResponseFormat.Json)]
         [ActionName("AllLTUpdates")]
-        public IQueryable<LT_Updates> GetLTUpdates()
+        public IQueryable<string> GetLTUpdates()
         {
-            var result = dataContext.LT_Updates.ToList();
+            var result = dataContext.LT_Updates.ToList().Select(a=>a.Content_URL);
 
-            return result.AsQueryable<LT_Updates>();
+            return result.AsQueryable<string>();
         }
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
