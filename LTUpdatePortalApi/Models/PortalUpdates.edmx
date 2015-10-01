@@ -33,6 +33,16 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="PortalUpdates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="ContentImage" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Updates">
           <Key>
             <PropertyRef Name="UpdateID" />
@@ -46,6 +56,7 @@
           <EntitySet Name="Flash_Updates" EntityType="Self.Flash_Updates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LT_Updates" EntityType="Self.LT_Updates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PDRM_Updates" EntityType="Self.PDRM_Updates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortalUpdates" EntityType="Self.PortalUpdates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -94,7 +105,18 @@
           <EntitySet Name="LT_Updates" EntityType="Self.LT_Updates" />
           <EntitySet Name="PDRM_Updates" EntityType="Self.PDRM_Updates" />
           <EntitySet Name="Updates" EntityType="Self.Update" />
+          <EntitySet Name="PortalUpdates" EntityType="LTUpdatesModel.PortalUpdate" />
         </EntityContainer>
+        <EntityType Name="PortalUpdate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ContentImage" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -139,6 +161,17 @@
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalUpdates">
+            <EntityTypeMapping TypeName="LTUpdatesModel.PortalUpdate">
+              <MappingFragment StoreEntitySet="PortalUpdates">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ContentImage" ColumnName="ContentImage" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

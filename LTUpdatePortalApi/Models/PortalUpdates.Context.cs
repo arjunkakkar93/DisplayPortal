@@ -29,5 +29,6 @@ namespace LTUpdatePortalApi.Models
         public virtual DbSet<LT_Updates> LT_Updates { get; set; }
         public virtual DbSet<PDRM_Updates> PDRM_Updates { get; set; }
         public virtual DbSet<Update> Updates { get; set; }
+        public virtual DbSet<PortalUpdate> PortalUpdates { get; set; }
     }
 }

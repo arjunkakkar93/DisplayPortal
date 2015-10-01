@@ -229,7 +229,7 @@
             success: function (result) {
                 
                 $.each(result, function (index, element) {
-                    var pdrmHtml = '<tr><td><div class="blue"><img margin-leftid="pdrmImage" height="100" width="100" src=\"' + element.Description + '\" alt="1"  /></div></td><td><div id="pdrmTextUpdate">' + element.Title + '</div></td></tr><tr><td>----------------</td></tr>';
+                    var pdrmHtml = '<tr><td><div class="blue"><img id="pdrmImage" height="100" width="100" src=\"' + element.Description + '\" alt="1"  /></div></td><td><div id="pdrmTextUpdate">' + element.Title + '</div></td></tr><tr><td>----------------</td></tr>';
                     pdrmUpdates.append(pdrmHtml);
                 }
                 

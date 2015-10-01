@@ -14,5 +14,14 @@ namespace Portal.Controllers
             //return View();
             return File(Server.MapPath("/Views/Home/") + "Index1.html", "text/html"); 
         }
+
+        // GET: Home
+        public ActionResult Google()
+        {
+            //return View();
+            return File(Server.MapPath("/Views/Home/") + "Index2.html", "text/html");
+        }
+
+
     }
 }

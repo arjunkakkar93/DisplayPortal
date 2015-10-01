@@ -181,6 +181,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\FetchUpdatesController.cs" />
+    <Compile Include="Controllers\PortalUpdatesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,6 +192,9 @@
       <DependentUpon>PortalUpdates.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PDRM_Updates.cs">
+      <DependentUpon>PortalUpdates.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PortalUpdate.cs">
       <DependentUpon>PortalUpdates.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PortalUpdates.Context.cs">

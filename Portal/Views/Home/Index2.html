@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title> - jsFiddle demo</title>
+
+
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.7.1.js'></script>
+    <link rel="stylesheet" type="text/css" href="http://fiddle.jshell.net/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="http://fiddle.jshell.net/css/result-light.css">
+    <link rel="stylesheet" type="text/css" href="http://www.drewgreenwell.com/content/metrojs.css">
+    <script type='text/javascript' src="http://www.drewgreenwell.com/scripts/metrojs.js"></script>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="../../Content/Site.css" rel="stylesheet" />
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <style type='text/css'>
+        .clear {
+            clear: both;
+        }
+    </style>
+
+
+
+
+
+
+
+
+    <script type='text/javascript'>
+        //<![CDATA[
+        $(window).load(function () {
+            //flip mode image swaps
+            //an array of 4 images to swap between. I've placed 1 last because it is the initial image as well
+            var imgs = [{ src: 'http://www.drewgreenwell.com/images/sample/2tw.gif', alt: '2' },
+                               { src: 'http://www.drewgreenwell.com/images/sample/3tw.gif', alt: '3' },
+                               { src: 'http://www.drewgreenwell.com/images/sample/4tw.gif', alt: '4' },
+                               { src: 'http://www.drewgreenwell.com/images/sample/1tw.gif', alt: '1' }
+            ];
+            $("#tile1").liveTile(
+                {
+                    mode: 'flip',
+                    swapFront: 'image',
+                    frontImages: imgs,
+                    //choose images in sequence from the array
+                    frontIsRandom: false
+                }
+            );
+            $("#tile2").liveTile(
+                {
+                    mode: 'flip',
+                    // or swapBack:'image'
+                    swap: 'image',
+                    backImages: imgs,
+                    //choose images randomly from the array
+                    backIsRandom: true
+                }
+            );
+
+
+            // carousel mode: random
+            function getRandomOptions() {
+                // this could obviously be a lot more random
+                var doIt = Math.floor(Math.random() * 1001) % 2 == 0;
+                // set random options supported by the goto method
+                // http://www.drewgreenwell.com/projects/metrojs#liveTileMethods
+                return {
+                    index: "next",
+                    delay: 3000,
+                    animationDirection: doIt ? 'forward' : 'backward',
+                    direction: doIt ? 'vertical' : 'horizontal'
+                };
+            }
+            // setup the tile and then call goto on it the first time
+            $("#tile3").liveTile({
+                animationComplete: function (tileData) {
+                    $(this).liveTile("goto", getRandomOptions());
+                }
+            }).liveTile("goto", getRandomOptions());
+
+
+        });//]]>
+
+
+
+
+    </script>
+
+</head>
+
+
+
+
+<body class="grey">
+   
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <div id="left-panel" style="margin-left:-200px;">
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+
+<script type="text/javascript">
+    var leftPanel = $('#left-panel');
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:1781/api/PortalUpdates/LeftUpdate/2",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+
+            var leftPanelHtml = '<img id="leftPanelImage" src=\"' + result.ContentImage + '\" alt="1" class="full" />';
+                leftPanel.append(leftPanelHtml);
+        
+        },
+        error: function (msg) {
+            alert("Images not loaded!");
+        }
+    });
+</script>
+
+   
+</body>
+</html>
