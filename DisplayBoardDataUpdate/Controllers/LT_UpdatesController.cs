@@ -14,6 +14,7 @@ namespace DisplayBoardDataUpdate.Controllers
    [AuthAuthorization(Authorized = true)]
     public class LT_UpdatesController : Controller
     {
+       
         private LTUpdatesEntities db = new LTUpdatesEntities();
 
         // GET: LT_Updates
@@ -53,6 +54,10 @@ namespace DisplayBoardDataUpdate.Controllers
         {
             if (ModelState.IsValid)
             {
+                
+                AzureController blobUpload = new AzureController("ltupdates-images");
+                string blobURL = blobUpload.AddToBlobStorage(lT_Updates.Content_URL, lT_Updates.Title);
+                lT_Updates.Content_URL = blobURL;
                 db.LT_Updates.Add(lT_Updates);
                 db.SaveChanges();
                 return RedirectToAction("Index");
