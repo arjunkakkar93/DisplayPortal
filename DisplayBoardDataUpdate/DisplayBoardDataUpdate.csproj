@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -146,6 +147,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AzureController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\Flash_UpdatesController.cs" />
     <Compile Include="Controllers\LT_UpdatesController.cs" />
     <Compile Include="Controllers\PDRM_UpdatesController.cs" />
@@ -155,6 +157,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mappers\LTUpdatesMapper.cs" />
     <Compile Include="Models\DisplayPortalUpdates.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,6 +176,7 @@
     <Compile Include="Models\Flash_Updates.cs">
       <DependentUpon>DisplayPortalUpdates.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\ltUpdatesVM.cs" />
     <Compile Include="Models\LT_Updates.cs">
       <DependentUpon>DisplayPortalUpdates.tt</DependentUpon>
     </Compile>
@@ -267,6 +271,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
     <Folder Include="Views\Azure\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

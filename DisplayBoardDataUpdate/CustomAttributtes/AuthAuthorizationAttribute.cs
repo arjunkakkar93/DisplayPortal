@@ -16,34 +16,44 @@ namespace DisplayBoardDataUpdate.CustomAttributtes
             
             string userName = HttpContext.Current.User.Identity.Name;
             string[] userArray = userName.Split('\\');
-
-            DirectoryEntry entry = new DirectoryEntry("GC://corp.microsoft.com");
-            DirectorySearcher mySearcher = new DirectorySearcher(entry);
-            mySearcher.Filter = "(&(objectClass=user)(SAMAccountName=" + userArray[1] + "))";
-            mySearcher.PropertiesToLoad.Add("cn");
-            mySearcher.PropertiesToLoad.Add("memberof");
-            //mySearcher.Filter = "(&(objectClass=user)(anr=test*))";                    
-            SearchResultCollection result = mySearcher.FindAll();
-            StringBuilder groupsList = new StringBuilder();
-            if (result != null)
+            try
             {
-                var groupCount = result[0].Properties["memberOf"].Count;
-
-                for (int counter = 0; counter < groupCount; counter++)
+                DirectoryEntry entry = new DirectoryEntry("GC://corp.microsoft.com");
+                DirectorySearcher mySearcher = new DirectorySearcher(entry);
+                mySearcher.Filter = "(&(objectClass=user)(SAMAccountName=" + userArray[1] + "))";
+                mySearcher.PropertiesToLoad.Add("cn");
+                mySearcher.PropertiesToLoad.Add("memberof");
+                //mySearcher.Filter = "(&(objectClass=user)(anr=test*))";                    
+                SearchResultCollection result = mySearcher.FindAll();
+                StringBuilder groupsList = new StringBuilder();
+                if (result != null)
                 {
-                    groupsList.Append((string)result[0].Properties["memberOf"][counter]);
-                    groupsList.Append("|");
+                    var groupCount = result[0].Properties["memberOf"].Count;
+
+                    for (int counter = 0; counter < groupCount; counter++)
+                    {
+                        groupsList.Append((string)result[0].Properties["memberOf"][counter]);
+                        groupsList.Append("|");
+                    }
+                }
+                string groups = groupsList.ToString();
+
+                if (groups.Contains("DBUG1"))
+                {
+                    Authorized = true;
+                }
+                else
+                {
+                    Exception e = new Exception("Not a member of DBUG group");
+                    HandleErrorInfo err = new HandleErrorInfo(e, "Error", "ErrorHandler");
+                    filterContext.Result = new ViewResult { ViewName = "Error", ViewData = new ViewDataDictionary(err) };
                 }
             }
-            string groups = groupsList.ToString();
-
-            if (groups.Contains("DBUG"))
+            catch(Exception e)
             {
-                Authorized = true;
-            }
-            else
-            {
-                filterContext.Result = new ViewResult { ViewName = "Error" };
+                HandleErrorInfo err = new HandleErrorInfo(e,"Error","ErrorHandler");
+                filterContext.Result = new ViewResult { ViewName = "Error", ViewData = new ViewDataDictionary(err) };
+                             
             }
         }
     }

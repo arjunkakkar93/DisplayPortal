@@ -1,4 +1,4 @@
-﻿@model DisplayBoardDataUpdate.Models.LT_Updates
+﻿@model DisplayBoardDataUpdate.Models.ltUpdatesVM
 
 @{
     ViewBag.Title = "Create";
@@ -6,7 +6,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "LT_Updates", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -42,7 +42,7 @@
             @Html.LabelFor(model => model.Content_URL, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 
-                @Html.TextBoxFor(model => model.Content_URL, new { @class = "form-control" , type="file" } )
+                @Html.TextBoxFor(model => model.Content_URL, new { @class = "form-control" , type="file" ,name="Content_URL"} )
                 @Html.ValidationMessageFor(model => model.Content_URL, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,3 +58,9 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section scripts{
+
+    
+    
+}

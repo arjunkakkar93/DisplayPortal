@@ -32,11 +32,11 @@ namespace DisplayBoardDataUpdate.Controllers
                 });
         }
         // GET: Azure
-        public string AddToBlobStorage(string id,string blobID)
+        public string AddToBlobStorage(string pathImage,string blobID)
         {
 
             CloudBlockBlob blockblob = container.GetBlockBlobReference(blobID);
-            using (var fileStream = System.IO.File.OpenRead(id))
+            using (var fileStream = System.IO.File.OpenRead(pathImage))
             {
                 blockblob.UploadFromStream(fileStream);
             }
