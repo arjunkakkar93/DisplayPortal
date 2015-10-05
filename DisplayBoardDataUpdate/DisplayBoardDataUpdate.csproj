@@ -157,7 +157,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Mappers\LTUpdatesMapper.cs" />
+    <Compile Include="Mappers\DisplayBoardUpdatesMapper.cs" />
     <Compile Include="Models\DisplayPortalUpdates.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -189,6 +189,9 @@
     <Compile Include="Models\Update.cs">
       <DependentUpon>DisplayPortalUpdates.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\PdrmUpdatesVM.cs" />
+    <Compile Include="Models\ViewModels\portalUpdatesVM.cs" />
+    <Compile Include="Models\ViewModels\updatesVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

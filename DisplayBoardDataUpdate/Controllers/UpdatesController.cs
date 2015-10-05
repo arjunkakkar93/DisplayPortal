@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using DisplayBoardDataUpdate.Models;
 using DisplayBoardDataUpdate.CustomAttributtes;
+using System.IO;
+using DisplayBoardDataUpdate.Models.ViewModels;
+using DisplayBoardDataUpdate.Mappers;
 
 namespace DisplayBoardDataUpdate.Controllers
 {
@@ -48,48 +51,56 @@ namespace DisplayBoardDataUpdate.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UpdateID,Title,CreatedBy,Description")] Update update)
+        public ActionResult Create([Bind(Include = "UpdateID,Title,CreatedBy,Description")] updatesVM updatevm)
         {
             if (ModelState.IsValid)
             {
+                var fi = Path.GetFileName(updatevm.Description.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images"), fi);
+                updatevm.Description.SaveAs(path);
+
+                AzureController blobUpload = new AzureController("updates-images");
+                string blobURL = blobUpload.AddToBlobStorage(path, updatevm.Title);
+                Update update = DisplayBoardUpdatesMapper.updateMapper(updatevm);
+                update.Description = blobURL;
                 db.Updates.Add(update);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(update);
+            return View(updatevm);
         }
 
         // GET: Updates/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Update update = db.Updates.Find(id);
-            if (update == null)
-            {
-                return HttpNotFound();
-            }
-            return View(update);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Update update = db.Updates.Find(id);
+        //    if (update == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(update);
+        //}
 
-        // POST: Updates/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UpdateID,Title,CreatedBy,Description")] Update update)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(update).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(update);
-        }
+        //// POST: Updates/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "UpdateID,Title,CreatedBy,Description")] Update update)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(update).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(update);
+        //}
 
         // GET: Updates/Delete/5
         public ActionResult Delete(int? id)

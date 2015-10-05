@@ -38,7 +38,7 @@ namespace DisplayBoardDataUpdate.CustomAttributtes
                 }
                 string groups = groupsList.ToString();
 
-                if (groups.Contains("DBUG1"))
+                if (groups.Contains("DBUG"))
                 {
                     Authorized = true;
                 }

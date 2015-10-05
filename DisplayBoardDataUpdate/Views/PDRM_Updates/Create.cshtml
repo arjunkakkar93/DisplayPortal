@@ -1,4 +1,4 @@
-﻿@model DisplayBoardDataUpdate.Models.PDRM_Updates
+﻿@model DisplayBoardDataUpdate.Models.ViewModels.PdrmUpdatesVM
 
 @{
     ViewBag.Title = "Create";
@@ -6,7 +6,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "PDRM_Updates", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -25,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Description, new { @class = "form-control", type = "file", name = "Description" })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>

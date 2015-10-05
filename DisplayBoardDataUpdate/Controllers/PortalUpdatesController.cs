@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using DisplayBoardDataUpdate.Models;
 using DisplayBoardDataUpdate.CustomAttributtes;
+using DisplayBoardDataUpdate.Models.ViewModels;
+using System.IO;
+using DisplayBoardDataUpdate.Mappers;
 
 namespace DisplayBoardDataUpdate.Controllers
 {
@@ -48,11 +51,19 @@ namespace DisplayBoardDataUpdate.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Description,ContentImage,CreatedBy")] PortalUpdate portalUpdate)
+        public ActionResult Create([Bind(Include = "ID,Title,Description,ContentImage,CreatedBy")] portalUpdatesVM portalUpdate)
         {
             if (ModelState.IsValid)
             {
-                db.PortalUpdates.Add(portalUpdate);
+                var fi = Path.GetFileName(portalUpdate.ContentImage.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images"), fi);
+                portalUpdate.ContentImage.SaveAs(path);
+
+                AzureController blobUpload = new AzureController("portalupdates-images");
+                string blobURL = blobUpload.AddToBlobStorage(path, portalUpdate.Title);
+                PortalUpdate portalupdate = DisplayBoardUpdatesMapper.portalUpdateMapper(portalUpdate);
+                portalupdate.ContentImage = blobURL;
+                db.PortalUpdates.Add(portalupdate);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -61,35 +72,35 @@ namespace DisplayBoardDataUpdate.Controllers
         }
 
         // GET: PortalUpdates/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PortalUpdate portalUpdate = db.PortalUpdates.Find(id);
-            if (portalUpdate == null)
-            {
-                return HttpNotFound();
-            }
-            return View(portalUpdate);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    PortalUpdate portalUpdate = db.PortalUpdates.Find(id);
+        //    if (portalUpdate == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(portalUpdate);
+        //}
 
-        // POST: PortalUpdates/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Description,ContentImage,CreatedBy")] PortalUpdate portalUpdate)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(portalUpdate).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(portalUpdate);
-        }
+        //// POST: PortalUpdates/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "ID,Title,Description,ContentImage,CreatedBy")] PortalUpdate portalUpdate)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(portalUpdate).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(portalUpdate);
+        //}
 
         // GET: PortalUpdates/Delete/5
         public ActionResult Delete(int? id)

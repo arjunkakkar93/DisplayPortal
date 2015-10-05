@@ -10,6 +10,7 @@ using DisplayBoardDataUpdate.Models;
 using DisplayBoardDataUpdate.CustomAttributtes;
 using System.IO;
 using DisplayBoardDataUpdate.Mappers;
+using DisplayBoardDataUpdate.Models.ViewModels;
 
 namespace DisplayBoardDataUpdate.Controllers
 {
@@ -62,7 +63,7 @@ namespace DisplayBoardDataUpdate.Controllers
 
                 AzureController blobUpload = new AzureController("ltupdates-images");
                 string blobURL = blobUpload.AddToBlobStorage(path, lT_Updates.Title);
-                LT_Updates ltupdate = LTUpdatesMapper.ltUpdateMapper(lT_Updates);
+                LT_Updates ltupdate = DisplayBoardUpdatesMapper.ltUpdateMapper(lT_Updates);
                 ltupdate.Content_URL = blobURL;
                 db.LT_Updates.Add(ltupdate);
                 db.SaveChanges();
