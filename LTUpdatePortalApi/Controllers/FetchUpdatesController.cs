@@ -85,6 +85,15 @@ namespace LTUpdatePortalApi.Controllers
             return dataContext.Flash_Updates.Find(id);
         }
 
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        [ActionName("GeneralUpdates")]
+
+        public IQueryable<PortalUpdate> GetPortalUpdate()
+        {
+            var result = dataContext.PortalUpdates.ToList();
+            return result.AsQueryable<PortalUpdate>();
+        }
+
         
     }
 }
