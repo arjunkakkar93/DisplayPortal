@@ -1,65 +1,56 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title> - jsFiddle demo</title>
 
 
-    <script type='text/javascript' src='http://code.jquery.com/jquery-1.7.1.js'></script>
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.10.1.js'></script>
     <link rel="stylesheet" type="text/css" href="http://fiddle.jshell.net/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="http://fiddle.jshell.net/css/result-light.css">
     <link rel="stylesheet" type="text/css" href="http://www.drewgreenwell.com/content/metrojs.css">
     <script type='text/javascript' src="http://www.drewgreenwell.com/scripts/metrojs.js"></script>
-    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link href="../../Content/Site.css" rel="stylesheet" />
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-    <style type='text/css'>
-        .clear {
-            clear: both;
-        }
-    </style>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>JQuery Advanced News Ticker | risq</title>
+    <!-- Bootstrap core CSS -->
+    <link href="http://risq.github.io/jquery-advanced-news-ticker/assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="http://risq.github.io/jquery-advanced-news-ticker/assets/css/main.css" rel="stylesheet">
+    <link href="http://risq.github.io/jquery-advanced-news-ticker/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://risq.github.io/jquery-advanced-news-ticker/assets/css/prism.css" rel="stylesheet" />
+    <link href="http://risq.github.io/jquery-advanced-news-ticker/assets/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+
+
+
+    <!--<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>-->
+    <script src="http://risq.github.io/jquery-advanced-news-ticker/assets/js/chart.js"></script>
+    <script src="http://risq.github.io/jquery-advanced-news-ticker/assets/js/bootstrap.js"></script>
+    <script src="http://risq.github.io/jquery-advanced-news-ticker/assets/js/prism.js"></script>
+    <script src="http://risq.github.io/jquery-advanced-news-ticker/assets/js/jquery.mCustomScrollbar.min.js"></script>
+    <script src="http://risq.github.io/jquery-advanced-news-ticker/jquery.newsTicker.js"></script>
+    <script src="~/Scripts/DynamicData.js"></script>
+
+
+    <script type='text/javascript' src='http://www.givainc.com/labs/lib/jquery.marquee.js'></script>
+    <link type="text/css" href="http://www.givainc.com/labs/css/jquery.marquee.css" rel="stylesheet" media="all" />
+
+
+</head>
 
 
 
 
-
-
-
-
-    <script type='text/javascript'>
+<body class="grey">
+    <script type="text/javascript">
         //<![CDATA[
         $(window).load(function () {
-            //flip mode image swaps
-            //an array of 4 images to swap between. I've placed 1 last because it is the initial image as well
-            var imgs = [{ src: 'http://www.drewgreenwell.com/images/sample/2tw.gif', alt: '2' },
-                               { src: 'http://www.drewgreenwell.com/images/sample/3tw.gif', alt: '3' },
-                               { src: 'http://www.drewgreenwell.com/images/sample/4tw.gif', alt: '4' },
-                               { src: 'http://www.drewgreenwell.com/images/sample/1tw.gif', alt: '1' }
-            ];
-            $("#tile1").liveTile(
-                {
-                    mode: 'flip',
-                    swapFront: 'image',
-                    frontImages: imgs,
-                    //choose images in sequence from the array
-                    frontIsRandom: false
-                }
-            );
-            $("#tile2").liveTile(
-                {
-                    mode: 'flip',
-                    // or swapBack:'image'
-                    swap: 'image',
-                    backImages: imgs,
-                    //choose images randomly from the array
-                    backIsRandom: true
-                }
-            );
-
-
-            // carousel mode: random
             function getRandomOptions() {
                 // this could obviously be a lot more random
                 var doIt = Math.floor(Math.random() * 1001) % 2 == 0;
@@ -80,57 +71,194 @@
             }).liveTile("goto", getRandomOptions());
 
 
-        });//]]>
+        });
+    </script>
+    <table style="margin-top:20px" border="0px">
+        <tr>
+            <td width="50%">
+                <div style="margin-left:-200px">
+                    <div class="container">
+                        <div class="row">
+                            <div class="">
+                                <div id="nt-example1-container">
+                                    <ul id="nt-example1"></ul>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td width="50%">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="red">
+                                <div id="tile3" data-mode="carousel" data-start-now="false" class="live-tile six-wide three-tall" data-repeat='0'>
+
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <table id="pdrmUpdates"></table>
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="50%">
+                <div style="margin-left:-200px">
+                    <div class="container">
+                        <div class="row">
+                            <div class="">
+                                <div id="nt-example1-container">
+                                    <ul id="nt-example1"></ul>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td width="50%">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="red">
+                                <div id="tile3" data-mode="carousel" data-start-now="false" class="live-tile six-wide three-tall" data-repeat='0'>
+
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <table id="pdrmUpdates"></table>
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 
 
 
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>
+
+        var nt_title = $('#nt-title').newsTicker({
+            row_height: 40,
+            max_rows: 1,
+            duration: 3000,
+            pauseOnHover: 0
+        });
+        var nt_example1 = $('#nt-example1').newsTicker({
+            row_height: 80,
+            max_rows: 11,
+            duration: 4000,
+            prevButton: $('#nt-example1-prev'),
+            nextButton: $('#nt-example1-next')
+        });
     </script>
 
-</head>
 
 
 
+    <script>
+        var updateList = $('#nt-example1');
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:1781/api/FetchUpdates/AllUpdates",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
 
-<body class="grey">
-   
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2">
-                <div id="left-panel" style="margin-left:-200px;">
+            success: function (result) {
+                $.each(result, function (index, element) {
+
+                    var entry = "<li><img height='60px' width='60px' src=\'" + element.Description + "\'/><b>   Title:</b>" + element.Title + "  <b>Created By:</b>" + element.CreatedBy + "</li>";
+                    updateList.append(entry);
+                });
+            },
+            error: function (msg) {
+                alert(msg);
+            }
+
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:1781/api/PortalUpdates/GeneralUpdates/",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                //var i = 0;
+                //var imageIds = "";
+                //var imageCon = "";
+                $.each(result, function (index, element) {
+                    var imageHtml = '<div><img id="LTUpdateImage1" class="full" src=\"' + element.ContentImage + '\" /></div>';
+                   
+                    $('#tile3').append(imageHtml);
                     
-                </div>
-            </div>
-            <div class="col-md-6">
-
-            </div>
-        </div>
-    </div>
-
-    
 
 
+                });
+            },
+            error: function (msg) {
+                alert("Images not loaded!");
+            }
+        });
+        var flashUpdates = "";
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:1781/api/FetchUpdates/AllFlashUpdates/",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                $.each(result, function (index, element) {
+                    flashUpdates += element.Title + "  #  ";
+                    $('#flashUpdates').text(flashUpdates);
+                }
 
+                );
+            },
+            error: function (msg) {
+                alert("Images not loaded!");
+            }
+        });
 
-<script type="text/javascript">
-    var leftPanel = $('#left-panel');
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:1781/api/PortalUpdates/LeftUpdate/2",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (result) {
+        var pdrmUpdates = $('#pdrmUpdates');
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:1781/api/FetchUpdates/AllPDRMUpdates",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
 
-            var leftPanelHtml = '<img id="leftPanelImage" src=\"' + result.ContentImage + '\" alt="1" class="full" />';
-                leftPanel.append(leftPanelHtml);
-        
-        },
-        error: function (msg) {
-            alert("Images not loaded!");
-        }
-    });
-</script>
+                $.each(result, function (index, element) {
+                    var pdrmHtml = '<tr><td><div class="blue"><img id="pdrmImage" height="100" width="100" src=\"' + element.Description + '\" alt="1"  /></div></td><td><div id="pdrmTextUpdate">' + element.Title + '</div></td></tr><tr><td>----------------</td></tr>';
+                    pdrmUpdates.append(pdrmHtml);
+                }
 
-   
+            );
+            },
+            error: function (msg) {
+                alert("Images not loaded!");
+            }
+        });
+    </script>
 </body>
 </html>

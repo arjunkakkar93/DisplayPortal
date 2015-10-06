@@ -25,11 +25,12 @@ namespace LTUpdatePortalApi.Controllers
         }
 
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        [ActionName("LeftUpdate")]
+        [ActionName("GeneralUpdates")]
         
-        public PortalUpdate GetPortalUpdateById(int id)
+        public IQueryable<PortalUpdate> GetPortalUpdate()
         {
-            return dataContext.PortalUpdates.Find(id);
+            var result = dataContext.PortalUpdates.ToList();
+            return result.AsQueryable<PortalUpdate>();
         }
 
 
