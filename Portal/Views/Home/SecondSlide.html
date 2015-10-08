@@ -1,0 +1,187 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title> - jsFiddle demo</title>
+
+
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.10.1.js'></script>
+
+    <link rel="stylesheet" type="text/css" href="http://fiddle.jshell.net/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="http://fiddle.jshell.net/css/result-light.css">
+    <link rel="stylesheet" type="text/css" href="http://www.drewgreenwell.com/content/metrojs.css">
+    <script type='text/javascript' src="http://www.drewgreenwell.com/scripts/metrojs.js"></script>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <style type='text/css'>
+        .clear {
+            clear: both;
+        }
+    </style>
+
+</head>
+<body>
+
+
+    <div class="tiles red">
+        <table>
+            <tr>
+                <td>
+                    
+                        <div id="tile1" data-mode="carousel" data-start-now="false" class="live-tile red six-wide three-tall" data-repeat='0'>
+                            <div id="tile0Title">
+                                
+                            </div>
+                            <div id="tile0Image">
+                                
+                            </div>
+                        </div>
+                    
+                </td>
+                <td>
+                    <div id="tile2" class="live-tile green six-wide three-tall" data-direction="horizontal" data-initdelay="500" data-delay="3000">
+                        <div id="tile1Title">
+                            
+                        </div>
+                        <div id="tile1Image">
+                            
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div id="tile3" class="live-tile blue six-wide three-tall" data-direction="horizontal" data-initdelay="500" data-delay="5000">
+                        <div id="tile2Title">
+
+                        </div>
+                        <div id="tile2Image">
+
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div id="tile4" class="live-tile yellow six-wide three-tall" data-direction="vertical" data-initdelay="500" data-delay="5000">
+                        <div id="tile3Title">
+                            
+                        </div>
+                        <div id="tile3Image">
+                            
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+    
+
+    <script>
+
+        
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:1781/api/FetchUpdates/GeneralUpdates/",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                $.each(result, function (index, element) {
+                        
+                    if (element.Description) {
+                        var titleHtml = '<p style="color=black">' + element.Description + '</p>';
+                        $('#tile' + index + 'Title').append(titleHtml);
+                    }
+                    else
+                    {
+                        var titleHtml = '<p style="color=black">' + element.Title + '</p>';
+                        $('#tile' + index + 'Title').append(titleHtml);
+                    }
+                      var imageHtml = "<img class='full' src=\'" + element.ContentImage + "\'/><span class='tile-title' style='color:black'>" + element.Title + "</span>";
+                        $('#tile' + index + 'Image').append(imageHtml);
+                   
+                   
+                    
+                });
+               
+            },
+            error: function (msg) {
+                alert("Images not loaded!");
+            }
+        });
+
+    </script>
+
+
+    <script type='text/javascript'>
+        //<![CDATA[
+        $(window).load(function () {
+            //flip mode image swaps
+            //an array of 4 images to swap between. I've placed 1 last because it is the initial image as well
+            //var imgs = [{src:'http://www.drewgreenwell.com/images/sample/2tw.gif', alt:'2'},
+            //{src:'http://www.drewgreenwell.com/images/sample/3tw.gif', alt:'3'},
+            //{src:'http://www.drewgreenwell.com/images/sample/4tw.gif', alt:'4'},
+            //{src:'http://www.drewgreenwell.com/images/sample/1tw.gif', alt:'1'}
+            //];
+            $("#tile3").liveTile(
+                {
+                    mode: 'flip',
+                    swapFront: 'image',
+                    frontIsRandom: false
+                }
+            );
+            $("#tile2").liveTile(
+                {
+                    mode: 'flip',
+                    swap: 'image',
+                    backIsRandom: true
+                }
+            );
+            $("#tile4").liveTile(
+                {
+                    mode: 'flip',
+                    swapFront: 'image',
+                    frontIsRandom: false
+                }
+            );
+
+
+            // carousel mode: random
+            function getRandomOptions() {
+                // this could obviously be a lot more random
+                var doIt = Math.floor(Math.random() * 1001) % 2 == 0;
+                // set random options supported by the goto method
+                // http://www.drewgreenwell.com/projects/metrojs#liveTileMethods
+                return {
+                    index: "next",
+                    delay: 3000,
+                    animationDirection: doIt ? 'forward' : 'backward',
+                    direction: doIt ? 'vertical' : 'horizontal'
+                };
+            }
+            // setup the tile and then call goto on it the first time
+            $("#tile1").liveTile({
+                animationComplete: function (tileData) {
+                    $(this).liveTile("goto", getRandomOptions());
+                }
+            }).liveTile("goto", getRandomOptions());
+
+
+        });//]]>
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>
