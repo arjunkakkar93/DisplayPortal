@@ -1,0 +1,244 @@
+﻿
+<!doctype html>
+<html>
+<head>
+
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.10.1.js'></script>
+    <link rel="stylesheet" type="text/css" href="http://fiddle.jshell.net/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="http://fiddle.jshell.net/css/result-light.css">
+    <link rel="stylesheet" type="text/css" href="http://www.drewgreenwell.com/content/metrojs.css">
+    <script type='text/javascript' src="http://www.drewgreenwell.com/scripts/metrojs.js"></script>
+
+    <meta name="viewport" content="width=device-width">
+    <script src="http://www.drewgreenwell.com/scripts/metrojs.js"></script>
+    <link rel="stylesheet" href="http://www.drewgreenwell.com/content/metrojs.css">
+   
+    <link href="../css/example.css" rel="stylesheet" />
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="http://risq.github.io/jquery-advanced-news-ticker/assets/js/jquery.newsTicker.js"></script>
+    <link href="http://risq.github.io/jquery-advanced-news-ticker/assets/css/prism.css" rel="stylesheet" />
+    <link href="http://risq.github.io/jquery-advanced-news-ticker/assets/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+    <link href="http://risq.github.io/jquery-advanced-news-ticker/assets/css/main.css" rel="stylesheet">
+    <link href="http://risq.github.io/jquery-advanced-news-ticker/assets/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+
+    <script src="http://risq.github.io/jquery-advanced-news-ticker/assets/js/chart.js"></script>
+    <script src="http://risq.github.io/jquery-advanced-news-ticker/assets/js/bootstrap.js"></script>
+    <script src="http://risq.github.io/jquery-advanced-news-ticker/assets/js/prism.js"></script>
+    <script src="http://risq.github.io/jquery-advanced-news-ticker/assets/js/jquery.mCustomScrollbar.min.js"></script>
+    <script src="http://risq.github.io/jquery-advanced-news-ticker/jquery.newsTicker.js"></script>
+
+
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #232525;
+            padding-top: 0px;
+        }
+
+        #slides {
+            display: none;
+        }
+
+            #slides .slidesjs-navigation {
+                margin-top: 5px;
+            }
+
+        a.slidesjs-next,
+        a.slidesjs-previous,
+        a.slidesjs-play,
+        a.slidesjs-stop {
+            background-image: url(img/btns-next-prev.png);
+            background-repeat: no-repeat;
+            display: block;
+            width: 0px;
+            height: 0px;
+            overflow: hidden;
+            text-indent: -9999px;
+            float: left;
+            margin-right: 5px;
+        }
+
+        a.slidesjs-next {
+            margin-right: 0px;
+            background-position: -12px 0;
+        }
+
+        a:hover.slidesjs-next {
+            background-position: -12px -18px;
+        }
+
+        a.slidesjs-previous {
+            background-position: 0 0;
+        }
+
+        a:hover.slidesjs-previous {
+            background-position: 0 -18px;
+        }
+
+        a.slidesjs-play {
+            width: 15px;
+            background-position: -25px 0;
+        }
+
+        a:hover.slidesjs-play {
+            background-position: -25px -18px;
+        }
+
+        a.slidesjs-stop {
+            width: 18px;
+            background-position: -41px 0;
+        }
+
+        a:hover.slidesjs-stop {
+            background-position: -41px -18px;
+        }
+
+        .slidesjs-pagination {
+            margin: 7px 0 0;
+            float: right;
+            list-style: none;
+        }
+
+            .slidesjs-pagination li {
+                float: left;
+                margin: 0 1px;
+            }
+
+                .slidesjs-pagination li a {
+                    display: block;
+                    width: 13px;
+                    height: 0;
+                    padding-top: 13px;
+                    background-position: 0 0;
+                    float: left;
+                    overflow: hidden;
+                }
+
+                    .slidesjs-pagination li a.active,
+                    .slidesjs-pagination li a:hover.active {
+                        background-position: 0 -13px;
+                    }
+
+                    .slidesjs-pagination li a:hover {
+                        background-position: 0 -26px;
+                    }
+
+        #slides a:link,
+        #slides a:visited {
+            color: #333;
+        }
+
+        #slides a:hover,
+        #slides a:active {
+            color: #9e2020;
+        }
+
+        .navbar {
+            overflow: hidden;
+        }
+    </style>
+
+    <style>
+        #slides {
+            display: none;
+        }
+
+        .container {
+            margin: 0 auto;
+        }
+
+        /* For tablets & smart phones */
+        @media (max-width: 767px) {
+            body {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .container {
+                width: auto;
+            }
+        }
+
+        /* For smartphones */
+        @media (max-width: 480px) {
+            .container {
+                width: auto;
+            }
+        }
+
+        /* For smaller displays like laptops */
+        @media (min-width: 768px) and (max-width: 979px) {
+            .container {
+                width: 724px;
+            }
+        }
+
+        /* For larger displays */
+        @media (min-width: 1200px) {
+            .container {
+                width: 1170px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="">
+        <div id="slides" style="padding-top:0px; margin-top: -70px">
+            <iframe id="1" src="https://www.youtube.com/embed/vPto6XpRq-U?autoplay=1&loop=1&playlist=vPto6XpRq-U" height="100%" width="100%"></iframe>
+            <iframe id="1" src="http://localhost:6638/Home/FirstSlide" height="100%" width="100%"></iframe>
+            <iframe id="1" src="http://localhost:6638/Home/SecondSlide" height="100%" width="100%"></iframe>
+            
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script src="../js/jquery.slides.min.js"></script>
+    
+    <!-- End SlidesJS Required -->
+    <!-- SlidesJS Required: Initialize SlidesJS with a jQuery doc ready -->
+    <script>
+    $(function() {
+      $('#slides').slidesjs({
+        width: 940,
+        height: 528,
+        play: {
+          active: true,
+          auto: true,
+          interval: 10000,
+          swap: true,
+          pauseOnHover: true,
+          restartDelay: 2500
+        }
+      });
+    });
+    </script>
+    <!-- End SlidesJS Required -->
+
+    <script>
+
+            var nt_example1 = $('#nt-example1').newsTicker({
+                row_height: 80,
+                max_rows: 3,
+                duration: 4000,
+                prevButton: $('#nt-example1-prev'),
+                nextButton: $('#nt-example1-next')
+            });
+    </script>
+</body>
+</html>

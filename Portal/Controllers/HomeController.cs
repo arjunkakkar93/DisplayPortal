@@ -22,6 +22,13 @@ namespace Portal.Controllers
             return File(Server.MapPath("/Views/Home/") + "SecondSlide.html", "text/html");
         }
 
+        // GET: Home
+        public ActionResult SlideShow()
+        {
+            //return View();
+            return File(Server.MapPath("/Views/Home/") + "SlideShow.html", "text/html");
+        }
+
 
     }
 }
